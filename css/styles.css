@@ -1344,6 +1344,12 @@ h3 {
   color: rgba(245,240,230,.66);
   font-variant-numeric: tabular-nums;
 }
+.lightbox-hint {
+  font-size: .66rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(245,240,230,.42);
+}
 .lightbox-btn {
   display: grid;
   place-items: center;
@@ -1459,6 +1465,7 @@ h3 {
 
 @media (max-width: 640px) {
   body { font-size: 1rem; }
+  .lightbox-hint { display: none; }
   .section { padding-block: clamp(3.4rem, 9vw, 4.5rem); }
   .hero { padding-top: 2rem; }
   .hero-eyebrow { font-size: .66rem; letter-spacing: .12em; }

@@ -277,13 +277,22 @@ if (copyBtn) {
         temp.remove();
       }
       copyBtn.classList.add('is-copied');
-      if (label) label.textContent = 'Copied';
+      if (label) {
+        label.textContent = 'Copied';
+        copyBtn.setAttribute('aria-label', 'Email address copied');
+      }
       window.setTimeout(() => {
         copyBtn.classList.remove('is-copied');
-        if (label) label.textContent = 'Copy';
+        if (label) {
+          label.textContent = 'Copy';
+          copyBtn.setAttribute('aria-label', 'Copy email address');
+        }
       }, 2200);
     } catch (err) {
-      if (label) label.textContent = 'Copy manually';
+      if (label) {
+        label.textContent = 'Copy manually';
+        copyBtn.setAttribute('aria-label', 'Copy email address manually');
+      }
     }
   });
 }
