@@ -62,7 +62,6 @@
 /* ---------- reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-html:focus-within { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
@@ -1704,4 +1703,113 @@ html { scroll-padding-top: calc(var(--header-h) + 24px); }
 }
 @media print {
   #about .about-copy, #about .about-aside { background: white; box-shadow: none; }
+}
+
+/* Final polish: explicit contrast, balanced hero rhythm, and stable navigation. */
+html { scroll-padding-top: calc(var(--header-h) + 1.25rem); }
+[id] { scroll-margin-top: calc(var(--header-h) + 1.25rem); }
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--accent-deep);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--paper);
+}
+
+.hero-grid { align-items: center; }
+.hero-copy { max-width: 650px; }
+.hero-eyebrow { margin-bottom: clamp(1rem, 2vw, 1.6rem); }
+.hero h1 {
+  margin-bottom: 0;
+  font-size: clamp(3.6rem, 6.7vw, 6rem);
+  line-height: .96;
+  letter-spacing: -.055em;
+}
+.hero h1 em { color: var(--pine); font-style: italic; }
+.hero-lead {
+  max-width: 48ch;
+  margin-top: clamp(1.25rem, 2.2vw, 1.75rem);
+  font-size: clamp(1.05rem, 1rem + .35vw, 1.2rem);
+  line-height: 1.72;
+}
+.hero-actions { margin-top: clamp(1.5rem, 2.5vw, 2rem); gap: clamp(1rem, 2vw, 1.5rem); }
+.hero-actions .btn { min-height: 3.25rem; border-radius: 3px; }
+.hero-note { margin-top: 1.1rem; gap: .35rem; line-height: 1.55; }
+.values-card {
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  border-radius: 5px;
+  background: var(--pine);
+  box-shadow: 8px 8px 0 var(--paper-3);
+}
+.values-card h2 { color: var(--paper); }
+.values-list h3 { color: var(--paper); }
+.values-list li { border-color: #66786d; }
+.values-card-link { border-color: #66786d; }
+.values-list p, .values-intro { color: #e1e6df; }
+.values-list li > span, .values-kicker { color: #e4ca91; }
+
+/* The marquee's original text inherited a dark body color on a dark-green panel.
+   Explicit foreground and equal-width groups keep it legible and seamless. */
+.ticker {
+  background: var(--pine);
+  color: var(--paper);
+  border-block: 1px solid var(--pine-2);
+  padding-block: .9rem;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: ticker 52s linear infinite;
+  will-change: transform;
+}
+.ticker-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 1.65rem;
+  padding-right: 1.65rem;
+}
+.ticker-group span {
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: clamp(.96rem, 1.35vw, 1.1rem);
+  font-style: italic;
+  line-height: 1.4;
+  white-space: nowrap;
+  user-select: text;
+}
+.ticker-group .ast { color: #e4ca91; font-size: .72rem; font-style: normal; }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker:hover .ticker-track, .ticker:focus-within .ticker-track { animation-play-state: paused; }
+
+/* Quiet, consistent surfaces instead of oversized rounded cards. */
+#about .about-copy, #about .about-aside { border-radius: 5px; }
+.strength { border-radius: 5px; }
+.btn { border-radius: 3px; }
+.section-head { scroll-margin-top: calc(var(--header-h) + 1.25rem); }
+.nav-desktop a[aria-current="true"] { background: var(--pine); color: var(--paper); }
+.nav-desktop a:hover { background: var(--pine-2); color: var(--paper); }
+
+@media (max-width: 900px) {
+  .hero-grid { gap: clamp(2rem, 5vw, 3rem); }
+  .hero-copy { max-width: 700px; }
+  .values-card { max-width: 700px; }
+}
+@media (max-width: 640px) {
+  .hero { padding-top: 1.8rem; }
+  .hero h1 { font-size: clamp(3rem, 14vw, 4.3rem); }
+  .hero-lead { margin-top: 1.1rem; line-height: 1.65; }
+  .hero-actions { margin-top: 1.35rem; }
+  .hero-actions .btn { min-height: 3.1rem; }
+  .hero-note { margin-top: .9rem; }
+  .values-card { padding: 1.3rem; box-shadow: 5px 5px 0 var(--paper-3); }
+  .ticker { padding-block: .72rem; }
+  .ticker-group { gap: 1.1rem; padding-right: 1.1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { width: 100%; animation: none; transform: none; will-change: auto; }
+  .ticker-group { width: 100%; flex-wrap: wrap; justify-content: center; gap: .5rem 1.1rem; padding-right: 0; }
+  .ticker-group[aria-hidden="true"] { display: none; }
 }
