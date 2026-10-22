@@ -39,15 +39,14 @@ assets/favicon.svg
 
    ```js
    const CONFIG = {
-     email: 'hello@yashthakur.in',
-     instagram: 'https://instagram.com/yash.makes'
+     email: 'yash.thakur26@pccoepune.org',
+     instagram: 'https://instagram.com/yashxart_'
    };
    ```
 
    The mailto links, the copy button and the form hand-off all read from this object.
 
-   > The email and Instagram handle above are placeholders. Swap them for Yash's real ones
-   > before sending the site to anyone.
+   These are the live contact details used throughout the site.
 
 2. **Swap the artwork** — replace the `.webp` files in `assets/img/` (keep the same filenames) and
    update the `<figcaption>` notes, `alt` text, `data-title` and `data-meta` on each `.work` in
@@ -97,7 +96,7 @@ the smaller hobby image reuses the elder portrait. No generated artwork remains.
 
 ## Still to do
 
-- [ ] Replace the placeholder email + Instagram handle.
+- [x] Set the college email address and @yashxart_ Instagram account.
 - [x] Replace sample artwork with selected images from the portfolio PDF.
 - [ ] Confirm the "2,000 followers in 45 days" figure and the class-monitor years if you want them
       dated more precisely.
