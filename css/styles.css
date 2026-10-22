@@ -1670,3 +1670,38 @@ html { scroll-padding-top: calc(var(--header-h) + 24px); }
   .hero, #about, .about-aside, .strength, .values-card { background: white; box-shadow: none; }
   .values-card, .values-card h2, .values-card h3 { color: black; }
 }
+
+/* A simpler portfolio cover and an always-readable About section. */
+.hero { background: radial-gradient(ellipse at 90% 0, #dce9df 0, transparent 58%), var(--paper); }
+.hero h1 { max-width: none; font-size: clamp(3.25rem, 6.5vw, 6.2rem); line-height: 1.04; letter-spacing: -.055em; }
+.hero h1 em { display: block; color: var(--pine); }
+.hero-eyebrow { letter-spacing: .12em; }
+.hero-copy { padding-block: 1rem; }
+.hero-lead { margin-top: 1.8rem; }
+.values-card { border: 1px solid #ffffff30; box-shadow: 0 20px 55px #193b3220; }
+.btn { transition: background-color .2s ease, color .2s ease, box-shadow .2s ease; }
+.btn--ink:hover { box-shadow: 0 6px 18px #193b3220; }
+#about .about-grid { align-items: start; }
+#about .about-copy { padding: clamp(1.25rem, 3vw, 2.25rem); border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+#about .about-copy .lede { margin-bottom: 1.4rem; }
+#about .about-copy .signature { margin-top: 1.6rem; }
+#about .about-aside { border-radius: 20px; box-shadow: 0 8px 28px #193b3208; }
+#about .detail-list > div { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
+#about .detail-list dt { font-size: .65rem; }
+#about .detail-list dd { font-size: .95rem; }
+#about .aside-note { border-top: 0; }
+.nav-desktop a:focus-visible, .mobile-nav-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (max-width: 900px) {
+  .hero-grid { gap: 2rem; }
+  .hero h1 { font-size: clamp(3.3rem, 10vw, 5.5rem); }
+  #about .about-grid { gap: 1.25rem; }
+}
+@media (max-width: 640px) {
+  .hero-copy { padding-block: 0; }
+  .hero h1 { font-size: clamp(3rem, 13vw, 4.5rem); }
+  .hero-lead { margin-top: 1.2rem; }
+  #about .about-copy, #about .about-aside { border-radius: 14px; padding: 1.25rem; }
+}
+@media print {
+  #about .about-copy, #about .about-aside { background: white; box-shadow: none; }
+}
