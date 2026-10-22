@@ -6,10 +6,10 @@
    ========================================================= */
 
 const CONFIG = {
-  // Replace with your real address before sharing the site.
-  email: 'hello@yashthakur.in',
+  // Primary contact address.
+  email: 'yash.thakur26@pccoepune.org',
   // Same handle used in the footer / contact block.
-  instagram: 'https://instagram.com/yash.makes'
+  instagram: 'https://instagram.com/yashxart_'
 };
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
