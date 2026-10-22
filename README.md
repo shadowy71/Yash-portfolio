@@ -79,23 +79,26 @@ python3 -m http.server 8080
 
 Deploy by uploading the folder to GitHub Pages, Netlify, Vercel or any static host — no build step.
 
-## About the artwork (important)
+## About the artwork
 
-The five gallery pieces and the two studio photos are **placeholders** — generated images used to
-prove the layout, because the artwork PDF hadn't reached the workspace when the site was built.
-Replace them with Yash's real scans:
+The five gallery images are extracted from `compressed-10mb-ART.pdf`, in PDF order:
 
-1. Export the PDF pages as images (or photograph the originals flat, in even daylight).
-2. Crop to the artwork, export WebP at ~1600px on the long edge, ~200 KB each.
-3. Drop them into `assets/img/` using the same filenames, then fix the captions and `alt` text.
+| PDF page | Local WebP | Gallery title |
+| --- | --- | --- |
+| 5 | `elder-pencil-portrait.webp` | Elder portrait |
+| 11 | `striped-turban-portrait.webp` | Striped turban |
+| 15 | `lamplit-colourful-landscape.webp` | Lamplit landscape |
+| 27 | `tiger-pencil-study.webp` | Tiger study |
+| 38 | `split-face-anime-sketch.webp` | Split-face character |
 
-Filenames: `art-portrait.webp`, `art-street.webp`, `art-botanical.webp`, `art-hands.webp`,
-`art-collage.webp`, plus `art-portrait-thumb.webp` and `studio.webp`.
+Images retain their source proportions, are capped at 1600px, and use WebP quality 85.
+The hero, social preview, and main hobby image reuse the lamplit landscape;
+the smaller hobby image reuses the elder portrait. No generated artwork remains.
 
 ## Still to do
 
 - [ ] Replace the placeholder email + Instagram handle.
-- [ ] Swap the sample artwork for Yash's own scans (see above).
+- [x] Replace sample artwork with selected images from the portfolio PDF.
 - [ ] Confirm the "2,000 followers in 45 days" figure and the class-monitor years if you want them
       dated more precisely.
 - [ ] Optional: add a real portrait photo to the About block if one is available.
