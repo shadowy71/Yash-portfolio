@@ -75,6 +75,11 @@ if (menuBtn && mobileMenu) {
   });
 }
 
+// Restore scrolling if an open mobile menu is resized into desktop mode.
+window.matchMedia('(min-width: 1081px)').addEventListener('change', (event) => {
+  if (event.matches) closeMenu(false);
+});
+
 /* =========================================================
    Reveal on scroll
    ========================================================= */
@@ -99,10 +104,10 @@ if ('IntersectionObserver' in window && !reduceMotion) {
 /* =========================================================
    Scroll spy for desktop nav
    ========================================================= */
-const navLinks = $$('.nav-desktop a[href^="#"]');
-const spySections = navLinks
+const navLinks = $$('.nav-desktop a[href^="#"], .mobile-nav-list a[href^="#"]');
+const spySections = [...new Set(navLinks
   .map((link) => document.getElementById(link.getAttribute('href').slice(1)))
-  .filter(Boolean);
+  .filter(Boolean))];
 
 if (spySections.length && 'IntersectionObserver' in window) {
   const spy = new IntersectionObserver((entries) => {
