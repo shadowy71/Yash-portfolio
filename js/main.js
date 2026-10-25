@@ -1,25 +1,28 @@
 /* =========================================================
-   Yash Thakur — portfolio interactions
-   ------------------------------------
-   Everything is progressive enhancement: the page reads fine
-   without JS. Configure contact details in CONFIG below.
+   Yash Thakur — Portfolio Interactions (2026)
+   Progressive enhancement: every section remains readable
+   without JavaScript and respects prefers-reduced-motion.
    ========================================================= */
 
 const CONFIG = {
-  // Primary contact address.
   email: 'yash.thakur26@pccoepune.org',
-  // Same handle used in the footer / contact block.
   instagram: 'https://instagram.com/yashxart_'
 };
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+let reduceMotion = reduceMotionQuery.matches;
+reduceMotionQuery.addEventListener?.('change', (e) => { reduceMotion = e.matches; });
 
-/* ---------- one-time hero intro (visual only; never gates content) ---------- */
+/* ---------- legacy hero intro (only when data-hero-reveal="off") ---------- */
 const skipIntro = $('[data-skip-intro]');
-const introWasReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (skipIntro && !introWasReduced && document.visibilityState === 'visible') {
+if (
+  skipIntro &&
+  document.documentElement.dataset.heroReveal === 'off' &&
+  !reduceMotion &&
+  document.visibilityState === 'visible'
+) {
   document.documentElement.classList.add('hero-intro-running');
   skipIntro.hidden = false;
   const finishIntro = () => {
@@ -33,29 +36,60 @@ if (skipIntro && !introWasReduced && document.visibilityState === 'visible') {
   }, { once: true });
 }
 
-/* ---------- year ---------- */
-$$('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
+/* ---------- dynamic year ---------- */
+$$('[data-year]').forEach((el) => {
+  el.textContent = String(new Date().getFullYear());
+});
 
-/* ---------- keep contact links in sync with CONFIG ---------- */
+/* ---------- sync contact links with CONFIG ---------- */
 $$('[data-email-link]').forEach((a) => {
   a.href = `mailto:${CONFIG.email}`;
   if (a.textContent.trim().includes('@')) a.textContent = CONFIG.email;
 });
-$$('[data-instagram-link]').forEach((a) => { a.href = CONFIG.instagram; });
+$$('[data-instagram-link]').forEach((a) => {
+  a.href = CONFIG.instagram;
+});
 
 /* =========================================================
-   Header + mobile menu
+   Header, Scroll Progress & Mobile Menu
    ========================================================= */
 const header = $('#site-header');
+const progressBar = $('[data-scroll-progress]');
 const menuBtn = $('.menu-toggle');
 const mobileMenu = $('#mobile-menu');
+const headerCta = $('.header-cta');
+const navLinks = $$('.nav-desktop a[href^="#"], .mobile-nav-list a[href^="#"]');
+const firstSection = $('#about');
 
-const onScroll = () => {
-  if (!header) return;
-  header.classList.toggle('is-scrolled', window.scrollY > 8);
-};
-onScroll();
-window.addEventListener('scroll', onScroll, { passive: true });
+function clearActiveNav() {
+  navLinks.forEach((link) => link.removeAttribute('aria-current'));
+  if (headerCta) headerCta.classList.remove('is-active');
+}
+
+let scrollTicking = false;
+function updateHeaderOnScroll() {
+  scrollTicking = false;
+  const y = window.scrollY;
+  if (header) {
+    header.classList.toggle('is-scrolled', y > 8);
+  }
+  if (progressBar && !reduceMotion) {
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const ratio = Math.min(1, Math.max(0, y / maxScroll));
+    progressBar.style.transform = `scaleX(${ratio.toFixed(4)})`;
+  }
+  if (firstSection && y < firstSection.offsetTop - window.innerHeight * 0.45) {
+    clearActiveNav();
+  }
+}
+
+updateHeaderOnScroll();
+window.addEventListener('scroll', () => {
+  if (!scrollTicking) {
+    scrollTicking = true;
+    window.requestAnimationFrame(updateHeaderOnScroll);
+  }
+}, { passive: true });
 
 let closeMenuTimer = null;
 
@@ -63,7 +97,7 @@ function openMenu() {
   if (!mobileMenu || !menuBtn) return;
   window.clearTimeout(closeMenuTimer);
   mobileMenu.hidden = false;
-  requestAnimationFrame(() => mobileMenu.classList.add('is-open'));
+  window.requestAnimationFrame(() => mobileMenu.classList.add('is-open'));
   menuBtn.setAttribute('aria-expanded', 'true');
   menuBtn.setAttribute('aria-label', 'Close menu');
   document.body.classList.add('is-locked');
@@ -77,7 +111,7 @@ function closeMenu(returnFocus = true) {
   document.body.classList.remove('is-locked');
   closeMenuTimer = window.setTimeout(() => {
     if (!mobileMenu.classList.contains('is-open')) mobileMenu.hidden = true;
-  }, reduceMotion ? 0 : 300);
+  }, reduceMotion ? 0 : 280);
   if (returnFocus) menuBtn.focus({ preventScroll: true });
 }
 
@@ -92,13 +126,13 @@ if (menuBtn && mobileMenu) {
   });
 }
 
-// Restore scrolling if an open mobile menu is resized into desktop mode.
-window.matchMedia('(min-width: 1081px)').addEventListener('change', (event) => {
-  if (event.matches) closeMenu(false);
+// Close mobile menu cleanly when viewport widens to desktop breakpoint (1025px+)
+window.matchMedia('(min-width: 1025px)').addEventListener?.('change', (event) => {
+  if (event.matches && mobileMenu && !mobileMenu.hidden) closeMenu(false);
 });
 
 /* =========================================================
-   Reveal on scroll
+   Scroll Reveal
    ========================================================= */
 const revealEls = $$('.reveal');
 if ('IntersectionObserver' in window && !reduceMotion) {
@@ -109,9 +143,10 @@ if ('IntersectionObserver' in window && !reduceMotion) {
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  }, { rootMargin: '0px 0px -7% 0px', threshold: 0.08 });
+
   revealEls.forEach((el, i) => {
-    el.style.transitionDelay = `${Math.min(i % 4, 3) * 55}ms`;
+    el.style.transitionDelay = `${Math.min(i % 4, 3) * 50}ms`;
     revealObserver.observe(el);
   });
 } else {
@@ -119,35 +154,47 @@ if ('IntersectionObserver' in window && !reduceMotion) {
 }
 
 /* =========================================================
-   Scroll spy for desktop nav
+   Section Scroll Spy
    ========================================================= */
-const navLinks = $$('.nav-desktop a[href^="#"], .mobile-nav-list a[href^="#"]');
-const spySections = [...new Set(navLinks
-  .map((link) => document.getElementById(link.getAttribute('href').slice(1)))
-  .filter(Boolean))];
+const spyIds = ['about', 'strengths', 'track', 'fit', 'art', 'hobbies', 'contact'];
+const spySections = spyIds.map((id) => document.getElementById(id)).filter(Boolean);
 
 if (spySections.length && 'IntersectionObserver' in window) {
   const spy = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
+      const targetHref = `#${entry.target.id}`;
       navLinks.forEach((link) => {
-        const isActive = link.getAttribute('href') === `#${entry.target.id}`;
-        if (isActive) link.setAttribute('aria-current', 'true');
-        else link.removeAttribute('aria-current');
+        if (link.getAttribute('href') === targetHref) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
       });
+      if (headerCta) {
+        headerCta.classList.toggle('is-active', entry.target.id === 'contact');
+      }
     });
-  }, { rootMargin: '-45% 0px -50% 0px' });
+  }, { rootMargin: '-42% 0px -50% 0px' });
+
   spySections.forEach((section) => spy.observe(section));
 }
 
 /* =========================================================
-   Gallery filter
+   Gallery Filter
    ========================================================= */
 const gallery = $('[data-gallery]');
 const filterButtons = $$('.filter');
 const galleryStatus = $('[data-gallery-status]');
 const galleryNote = $('.gallery-note');
 const works = $$('.work', gallery || document);
+
+function getFilterLabel(btn) {
+  const clone = btn.cloneNode(true);
+  const count = clone.querySelector('.count');
+  if (count) count.remove();
+  return clone.textContent.trim();
+}
 
 filterButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -170,7 +217,7 @@ filterButtons.forEach((btn) => {
     if (galleryStatus) {
       galleryStatus.textContent = filter === 'all'
         ? `Showing all ${shown} pieces`
-        : `Showing ${shown} of ${works.length} — ${filter}`;
+        : `Showing ${shown} of ${works.length} — ${getFilterLabel(btn)}`;
     }
   });
 });
@@ -207,8 +254,10 @@ function renderLightbox() {
   lbNote.textContent = note ? note.textContent : '';
   lbCounter.textContent = `${lbIndex + 1} / ${visibleWorks.length}`;
   const single = visibleWorks.length < 2;
-  $('[data-lightbox-prev]').hidden = single;
-  $('[data-lightbox-next]').hidden = single;
+  const prevBtn = $('[data-lightbox-prev]');
+  const nextBtn = $('[data-lightbox-next]');
+  if (prevBtn) prevBtn.hidden = single;
+  if (nextBtn) nextBtn.hidden = single;
 }
 
 function openLightbox(work) {
@@ -226,7 +275,9 @@ function closeLightbox() {
   if (!lightbox) return;
   lightbox.hidden = true;
   document.body.classList.remove('is-locked');
-  if (lastFocused) lastFocused.focus({ preventScroll: true });
+  if (lastFocused && typeof lastFocused.focus === 'function') {
+    lastFocused.focus({ preventScroll: true });
+  }
 }
 
 function stepLightbox(direction) {
@@ -243,8 +294,10 @@ works.forEach((work) => {
 
 if (lightbox) {
   $$('[data-lightbox-close]').forEach((el) => el.addEventListener('click', closeLightbox));
-  $('[data-lightbox-prev]').addEventListener('click', () => stepLightbox(-1));
-  $('[data-lightbox-next]').addEventListener('click', () => stepLightbox(1));
+  const prevBtn = $('[data-lightbox-prev]');
+  const nextBtn = $('[data-lightbox-next]');
+  if (prevBtn) prevBtn.addEventListener('click', () => stepLightbox(-1));
+  if (nextBtn) nextBtn.addEventListener('click', () => stepLightbox(1));
 
   lightbox.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].clientX;
@@ -278,7 +331,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* =========================================================
-   Copy email
+   Copy Email
    ========================================================= */
 const copyBtn = $('[data-copy-email]');
 if (copyBtn) {
@@ -310,7 +363,7 @@ if (copyBtn) {
           copyBtn.setAttribute('aria-label', 'Copy email address');
         }
       }, 2200);
-    } catch (err) {
+    } catch {
       if (label) {
         label.textContent = 'Copy manually';
         copyBtn.setAttribute('aria-label', 'Copy email address manually');
@@ -320,7 +373,7 @@ if (copyBtn) {
 }
 
 /* =========================================================
-   Contact form — validates, then hands off to email client
+   Contact Form — Client Validation + Mailto Handoff
    ========================================================= */
 const form = $('[data-contact-form]');
 const formStatus = $('[data-form-status]');
@@ -372,7 +425,7 @@ if (form) {
     if (firstInvalid) {
       if (formStatus) {
         formStatus.classList.add('is-error');
-        formStatus.textContent = 'A couple of fields still need a look — I\'ve marked them above.';
+        formStatus.textContent = 'A couple of fields still need a look — marked above.';
       }
       firstInvalid.input.focus({ preventScroll: false });
       return;
@@ -387,11 +440,11 @@ if (form) {
 
     const subject = org ? `${topic} — ${org}` : `${topic} — hello from ${name}`;
     const body = [
-      `Hi Yash,`,
-      ``,
+      'Hi Yash,',
+      '',
       message,
-      ``,
-      `—`,
+      '',
+      '—',
       `Name: ${name}`,
       `Email: ${email}`,
       org ? `Club / committee: ${org}` : null,
@@ -407,7 +460,7 @@ if (form) {
       text.textContent = `Opening your email app with the message ready for ${CONFIG.email}. `;
       const fallback = document.createElement('a');
       fallback.href = mailto;
-      fallback.textContent = 'Nothing happened? Tap here.';
+      fallback.textContent = 'Nothing happened? Open mail link.';
       formStatus.append(text, fallback);
     }
 
@@ -416,7 +469,7 @@ if (form) {
 }
 
 /* =========================================================
-   Print / save-as-PDF résumé
+   Print / Save-as-PDF Résumé
    ========================================================= */
 const printBtn = $('[data-print]');
 if (printBtn) {
