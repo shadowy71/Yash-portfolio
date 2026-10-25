@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-hero-reveal="on">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,12 +9,14 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yash Thakur — Student portfolio, first year 2026">
 <meta property="og:description" content="Clear communication, initiative, and follow-through. Meet Yash Thakur, a first-year student in Pune ready to contribute to a team.">
-<meta property="og:image" content="assets/img/lamplit-colourful-landscape.webp">
+<meta property="og:image" content="components/HeroPortraitReveal/assets/hero-poster-frame.png">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/fraunces-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/hero-intro.css">
+<link rel="stylesheet" href="components/HeroPortraitReveal/hero-portrait-reveal.css">
+<link rel="preload" as="image" href="components/HeroPortraitReveal/assets/yash-thakur-portrait.avif" type="image/avif" fetchpriority="high">
 <script>document.documentElement.classList.add('js')</script>
 <script src="js/main.js" defer></script>
 <script type="application/ld+json">
@@ -28,6 +30,7 @@
   "knowsAbout": ["Public relations", "Social media management", "Event coordination", "Illustration", "Painting"]
 }
 </script>
+<script src="components/HeroPortraitReveal/hero-portrait-reveal.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -87,8 +90,31 @@
 
 <main id="main">
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="top" aria-labelledby="hero-title">
+  <!-- Portrait-reveal hero. Revert with data-hero-reveal="off" on <html>. -->
+  <div class="hero-stage" id="top">
+  <section class="hero-portrait-reveal" aria-labelledby="hero-reveal-title" data-hero-reveal-scene data-play="true">
+    <div class="hero-reveal__depth">
+      <div class="hero-reveal__backlight" aria-hidden="true"></div>
+      <div class="hero-reveal__bar" aria-hidden="true"></div>
+      <picture>
+        <source srcset="components/HeroPortraitReveal/assets/yash-thakur-portrait.avif" type="image/avif">
+        <source srcset="components/HeroPortraitReveal/assets/yash-thakur-portrait.webp" type="image/webp">
+        <img class="hero-reveal__portrait" src="components/HeroPortraitReveal/assets/yash-thakur-portrait.webp" alt="Portrait of Yash Thakur" width="1254" height="1254" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+    <div class="hero-reveal__grain" aria-hidden="true"></div>
+    <div class="hero-reveal__copy">
+      <h1 id="hero-reveal-title" class="hero-reveal__name"><span class="hero-reveal__word">YASH</span> <span class="hero-reveal__word">THAKUR</span></h1>
+      <p class="hero-reveal__subhead">First-year engineering student · Pune</p>
+    </div>
+    <div class="hero-reveal__actions">
+      <a class="btn" href="#contact" data-cta>Start a conversation <span aria-hidden="true">↗</span></a>
+      <a class="link-arrow" href="#strengths">What I bring to a team</a>
+    </div>
+    <button class="hero-reveal__skip" type="button" data-hero-skip>Skip intro</button>
+  </section>
+
+  <section class="hero hero-legacy" id="top-legacy" aria-labelledby="hero-title">
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <p class="eyebrow hero-eyebrow">
@@ -122,6 +148,8 @@
       </aside>
     </div>
 
+  </section>
+
     <div class="stats-bar" role="group" aria-label="Key numbers">
       <div class="wrap stats-grid">
         <div class="stat">
@@ -142,7 +170,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- ============ TICKER ============ -->
   <div class="ticker" role="region" aria-label="Ways I can contribute">
