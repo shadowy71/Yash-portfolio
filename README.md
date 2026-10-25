@@ -50,8 +50,7 @@ assets/favicon.svg
 
 2. **Swap the artwork** — replace the `.webp` files in `assets/img/` (keep the same filenames) and
    update the `<figcaption>` notes, `alt` text, `data-title` and `data-meta` on each `.work` in
-   `index.html`. Filter counts live in the `data-medium` attribute: `drawing`, `paint`,
-   `watercolour`, `mixed`.
+   `index.html`. Filter counts live in the `data-medium` attribute: `drawing`, `paint`, `sketch`.
 
 3. **Add or remove a piece** — copy a `<figure class="work ...">` block, give it a
    `data-medium`, and update the counts in the filter buttons and `.gallery-note` grid span.
