@@ -13,7 +13,7 @@
     scene.dataset.play = 'false';
     scene.classList.add('is-settled');
     skip.hidden = true;
-    scene.querySelectorAll('.hero-reveal__depth, .hero-reveal__portrait, .hero-reveal__backlight, .hero-reveal__name, .hero-reveal__subhead')
+    scene.querySelectorAll('.hero-reveal__depth, .hero-reveal__portrait, .hero-reveal__backlight, .hero-reveal__name')
       .forEach((element) => element.getAnimations().forEach((animation) => animation.cancel()));
   }
 
