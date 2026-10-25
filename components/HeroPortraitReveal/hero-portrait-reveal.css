@@ -26,8 +26,9 @@
   transform: translate3d(0, -2%, 0) rotateX(0deg) scale(1.02);
 }
 .hero-reveal__portrait {
-  position: absolute; left: 50%; bottom: -10%; width: min(86vw, 720px); height: 89%;
+  position: absolute; left: 50%; bottom: -16%; width: min(86vw, 720px); height: 89%;
   object-fit: cover; object-position: center 34%; transform: translateX(-50%);
+  border: 1px solid rgba(188,64,35,.38);
   background: #14131a url("assets/yash-thakur-lqip.webp") center / cover no-repeat;
   filter: grayscale(.28) sepia(.14) saturate(1.18) contrast(1.06) drop-shadow(0 -2px 14px color-mix(in srgb, var(--hero-accent) 24%, transparent));
   clip-path: ellipse(100% 100% at 50% 50%);
@@ -45,7 +46,7 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
 }
 .hero-reveal__copy {
-  position: absolute; z-index: 2; top: 10%; left: 50%; transform: translateX(-50%);
+  position: absolute; z-index: 2; top: clamp(1rem, 3vh, 2rem); left: 50%; transform: translateX(-50%);
   width: min(100% - 40px, 1080px); margin: 0; text-align: center;
 }
 .hero-reveal__name {
@@ -62,7 +63,7 @@
 .hero-actions-band { display: grid; place-items: center; padding: 1.05rem var(--pad); background: var(--paper-2); border-block: 1px solid var(--line); }
 .hero-reveal__actions--below { width: min(100%, var(--wrap)); margin: 0 auto; padding: 0; }
 .hero-reveal__actions.hero-reveal__actions--below .link-arrow { color: var(--ink); background: transparent; }
-.hero-reveal__actions .btn { --btn-bg: var(--hero-accent); --btn-fg: #fff; border-color: var(--hero-accent); color: #fff; text-shadow: none; }
+.hero-reveal__actions .btn { --btn-bg: var(--ink); --btn-fg: #fff; border-color: var(--ink); color: #fff; text-shadow: none; }
 .hero-reveal__actions .link-arrow { color: var(--hero-light); padding: .55rem .75rem; background: rgba(8,8,10,.58); }
 .hero-reveal__skip {
   position: absolute; z-index: 5; top: 1rem; right: var(--pad); padding: .5rem .75rem;
@@ -96,7 +97,7 @@ html[data-hero-reveal="off"] .hero-actions-band { display: none; }
 @media (max-width: 480px) {
   .hero-reveal__depth { inset: -5% 0 -2%; }
   .hero-reveal__portrait { width: 100vw; height: 78%; bottom: -5%; object-position: center 31%; }
-  .hero-reveal__copy { top: 9%; width: calc(100% - 32px); }
+  .hero-reveal__copy { top: clamp(1rem, 3vh, 2rem); width: calc(100% - 32px); }
   .hero-reveal__actions { flex-direction: column; gap: .7rem; margin-top: 1rem; }
   .hero-reveal__actions--below { margin-top: 0; }
   .hero-reveal__grain { display: none; }
