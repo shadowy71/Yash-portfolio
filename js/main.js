@@ -16,6 +16,23 @@ const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* ---------- one-time hero intro (visual only; never gates content) ---------- */
+const skipIntro = $('[data-skip-intro]');
+const introWasReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (skipIntro && !introWasReduced && document.visibilityState === 'visible') {
+  document.documentElement.classList.add('hero-intro-running');
+  skipIntro.hidden = false;
+  const finishIntro = () => {
+    document.documentElement.classList.remove('hero-intro-running');
+    skipIntro.hidden = true;
+  };
+  const introTimer = window.setTimeout(finishIntro, 4200);
+  skipIntro.addEventListener('click', () => {
+    window.clearTimeout(introTimer);
+    finishIntro();
+  }, { once: true });
+}
+
 /* ---------- year ---------- */
 $$('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
