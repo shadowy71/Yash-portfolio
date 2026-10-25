@@ -1,6 +1,6 @@
 # Hero portrait reveal
 
-A one-shot, 7-second CSS portrait reveal for the existing static portfolio. The scene is a near-black hero with the uploaded portrait, a warm vermillion backlight, a single steady camera rise, real HTML headline text, and the existing contact actions. It does not loop or block navigation.
+A one-shot, 7-second CSS portrait reveal for the existing static portfolio. The scene is a near-black hero with the uploaded portrait, a warm vermillion backlight, a single steady camera rise, and real HTML headline text. The existing contact actions sit in a separate, centered band immediately below the hero, before the stats. The intro does not loop or block navigation.
 
 ## Variables / how to change the scene
 

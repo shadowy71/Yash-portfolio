@@ -59,6 +59,9 @@
   display: flex; justify-content: center; gap: 1rem; align-items: center;
 }
 .hero-reveal__actions a { color: var(--hero-light); }
+.hero-actions-band { display: grid; place-items: center; padding: 1.05rem var(--pad); background: var(--paper-2); border-block: 1px solid var(--line); }
+.hero-reveal__actions--below { width: min(100%, var(--wrap)); margin: 0 auto; padding: 0; }
+.hero-reveal__actions.hero-reveal__actions--below .link-arrow { color: var(--ink); background: transparent; }
 .hero-reveal__actions .btn { --btn-bg: var(--hero-accent); --btn-fg: #fff; border-color: var(--hero-accent); color: #fff; text-shadow: none; }
 .hero-reveal__actions .link-arrow { color: var(--hero-light); padding: .55rem .75rem; background: rgba(8,8,10,.58); }
 .hero-reveal__skip {
@@ -88,12 +91,14 @@
 @keyframes hero-word { from { opacity: 0; filter: blur(8px); transform: translateY(5px); } to { opacity: .96; filter: blur(0); transform: translateY(0); } }
 @keyframes hero-glow { 0%,78% { text-shadow: 0 0 18px color-mix(in srgb, var(--hero-accent) 30%, transparent), 0 0 48px color-mix(in srgb, var(--hero-accent) 14%, transparent); } 85% { text-shadow: 0 0 19px color-mix(in srgb, var(--hero-accent) 32%, transparent), 0 0 51px color-mix(in srgb, var(--hero-accent) 15%, transparent); } 92% { text-shadow: 0 0 17px color-mix(in srgb, var(--hero-accent) 28%, transparent), 0 0 45px color-mix(in srgb, var(--hero-accent) 13%, transparent); } 100% { text-shadow: 0 0 18px color-mix(in srgb, var(--hero-accent) 30%, transparent), 0 0 48px color-mix(in srgb, var(--hero-accent) 14%, transparent); } }
 html[data-hero-reveal="on"] .hero-legacy { display: none; }
-html[data-hero-reveal="off"] .hero-portrait-reveal { display: none; }
+html[data-hero-reveal="off"] .hero-portrait-reveal,
+html[data-hero-reveal="off"] .hero-actions-band { display: none; }
 @media (max-width: 480px) {
   .hero-reveal__depth { inset: -5% 0 -2%; }
   .hero-reveal__portrait { width: 100vw; height: 78%; bottom: -5%; object-position: center 31%; }
   .hero-reveal__copy { top: 9%; width: calc(100% - 32px); }
   .hero-reveal__actions { flex-direction: column; gap: .7rem; margin-top: 1rem; }
+  .hero-reveal__actions--below { margin-top: 0; }
   .hero-reveal__grain { display: none; }
   @keyframes hero-camera { from { transform: translate3d(0,4.8%,0) rotateX(4deg) scale(1.04); } to { transform: translate3d(0,-1.2%,0) rotateX(0deg) scale(1.012); } }
 }
