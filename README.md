@@ -19,7 +19,7 @@ No build step, no framework, no tracking. Open `index.html` and it works.
 | **Track record** | Honest timeline from SSC through Class Representative, the 2k art page, and first year. |
 | **Art gallery** | Five original pieces, medium filters, and a keyboard/touch-friendly lightbox. |
 | **Hobbies** | Sketching, painting, craft & collage, and content making, with studio photography. |
-| **The pitch** | A dark editorial block that frames the ask, plus the list of club types it applies to. |
+| **The pitch** | A warm walnut-dark editorial chamber that frames the ask, plus the list of club types it applies to. |
 | **Contact** | Email + copy button, Instagram, a validated message form that hands off to the visitor's mail app, and a **Print / save as PDF** action that produces a clean 8-page document (no nav, no forms). |
 
 ## Structure
@@ -63,7 +63,11 @@ assets/favicon.svg
   the artwork after closing, focus trap while the viewer is open.
 - The mobile menu traps nothing but closes on navigation and returns focus to the toggle.
 - Motion respects `prefers-reduced-motion`; the site is fully legible with JS disabled.
-- Colour pairings meet WCAG AA (body text 5.2:1+, headings 9:1+, dark section 13.8:1).
+- One unified cinematic theme: near-black (`#0B0A09`) fields with burnt-orange / amber
+  environmental light, warm off-white type, and sage green reserved for availability/success
+  signals. Tokens and per-section glow controls (`--glow-*`) live in `:root` and `.section`
+  in `css/styles.css`; every section shares the hero's atmosphere.
+- Colour pairings meet WCAG AA on dark (headings 17.0:1, body 10.3:1, muted 6.3:1, amber accents 9.0:1).
 - `@media print` strips navigation, forms and the lightbox and turns the page into a clean
   one-document résumé.
 

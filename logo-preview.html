@@ -21,22 +21,22 @@
     font-display: swap;
   }
   :root {
-    --dark: #090A09;
-    --dark-2: #111310;
-    --emerald: #123F34;
-    --emerald-accent: #1D6955;
-    --ivory: #F5F1EB;
-    --soft-white: #FFFCF8;
-    --ink: #111412;
-    --muted: #5C5C55;
-    --rose: #E5A4B7;
-    --border: rgba(31, 43, 36, 0.10);
+    --dark: #0B0A09;
+    --dark-2: #171310;
+    --amber: #E6A064;
+    --accent: #C77A42;
+    --ivory: #F3EDE4;
+    --ink: #C4B9AD;
+    --muted: #9C8F80;
+    --border: rgba(222, 171, 128, 0.16);
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     font-family: 'Manrope Variable', system-ui, sans-serif;
-    background: var(--ivory);
+    background:
+      radial-gradient(ellipse 60% 40% at 85% 0%, rgba(230, 160, 100, 0.10) 0%, transparent 65%),
+      var(--dark);
     color: var(--ink);
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
@@ -48,12 +48,13 @@
     gap: 0.45rem;
     font-size: 0.84rem;
     font-weight: 600;
-    color: var(--emerald);
+    color: var(--amber);
     text-decoration: none;
     margin-bottom: 1.5rem;
   }
-  .back:hover { color: var(--emerald-accent); }
+  .back:hover { color: var(--ivory); }
   h1 {
+    color: var(--ivory);
     font-family: 'Fraunces Variable', Georgia, serif;
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 380;
@@ -63,11 +64,11 @@
   .subtitle { color: var(--muted); font-size: 0.96rem; margin: 0 0 2.4rem; max-width: 60ch; }
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.4rem; }
   .card {
-    background: var(--soft-white);
+    background: var(--dark-2);
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 1.6rem 1.75rem;
-    box-shadow: 0 14px 36px -14px rgba(18, 63, 52, 0.09);
+    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.60);
   }
   .card--dark {
     background: var(--dark);
@@ -75,6 +76,7 @@
     border-color: rgba(245, 241, 235, 0.12);
   }
   .card h2 {
+    color: var(--ivory);
     font-family: 'Fraunces Variable', Georgia, serif;
     font-size: 1.15rem;
     margin: 0 0 1.1rem;
@@ -86,11 +88,11 @@
     font-size: 0.66rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--emerald);
+    color: var(--amber);
     font-weight: 700;
     margin-bottom: 0.45rem;
   }
-  .card--dark .label { color: var(--rose); }
+  .card--dark .label { color: var(--amber); }
   .brand {
     display: inline-flex;
     align-items: center;
@@ -106,7 +108,8 @@
     height: 38px;
     padding: 5px;
     border-radius: 10px;
-    background: var(--emerald);
+    background: linear-gradient(155deg, #2B1D11 0%, #171310 100%);
+    border: 1px solid rgba(222, 171, 128, 0.24);
     color: var(--ivory);
     flex-shrink: 0;
   }
@@ -123,7 +126,7 @@
   }
   .card--dark .brand-sub { color: rgba(245, 241, 235, 0.62); }
   .fav-preview {
-    background: var(--ivory);
+    background: rgba(243, 237, 228, 0.04);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1rem;
@@ -140,19 +143,19 @@
 <div class="wrap">
   <a class="back" href="index.html">← Back to portfolio</a>
   <h1>Brand mark &amp; surface tokens</h1>
-  <p class="subtitle">YT monogram specimen across the portfolio’s warm-ivory navigation, deep-emerald surface, and primary-dark footer.</p>
+  <p class="subtitle">YT monogram specimen across the portfolio’s cinematic near-black navigation, walnut surfaces, and deepest-black footer.</p>
 
   <div class="grid">
     <article class="card">
-      <span class="label">Navigation — Warm Ivory</span>
+      <span class="label">Navigation — Cinematic Dark</span>
       <h2>Header Lockup</h2>
       <a class="brand" href="index.html">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4.5" width="31" height="31" rx="6.5" stroke-width="0.75" opacity="0.32"/><path d="M9 10.5 L31 10.5" stroke-width="1.35"/><path d="M20 10.5 L20 26.5" stroke-width="1.15"/><path d="M11.5 26.5 L20 10.5 L28.5 26.5" stroke-width="1.6"/><circle cx="20" cy="32" r="1.6" fill="#E5A4B7" stroke="none"/></svg>
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4.5" width="31" height="31" rx="6.5" stroke-width="0.75" opacity="0.32"/><path d="M9 10.5 L31 10.5" stroke-width="1.35"/><path d="M20 10.5 L20 26.5" stroke-width="1.15"/><path d="M11.5 26.5 L20 10.5 L28.5 26.5" stroke-width="1.6"/><circle cx="20" cy="32" r="1.6" fill="#E6A064" stroke="none"/></svg>
         </span>
         <span>Yash Thakur<span class="brand-sub">Portfolio · 2026</span></span>
       </a>
-      <p class="note">Deep emerald badge (#123F34) with warm ivory geometry and subtle rose accent point.</p>
+      <p class="note">Walnut badge (#2B1D11 → #171310) with warm ivory geometry and a burnt-amber accent point.</p>
     </article>
 
     <article class="card card--dark">
@@ -160,11 +163,11 @@
       <h2>Closing Lockup</h2>
       <a class="brand" href="index.html#contact">
         <span class="brand-mark" aria-hidden="true" style="border: 1px solid rgba(245,241,235,0.16);">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4.5" width="31" height="31" rx="6.5" stroke-width="0.75" opacity="0.32"/><path d="M9 10.5 L31 10.5" stroke-width="1.35"/><path d="M20 10.5 L20 26.5" stroke-width="1.15"/><path d="M11.5 26.5 L20 10.5 L28.5 26.5" stroke-width="1.6"/><circle cx="20" cy="32" r="1.6" fill="#E5A4B7" stroke="none"/></svg>
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4.5" width="31" height="31" rx="6.5" stroke-width="0.75" opacity="0.32"/><path d="M9 10.5 L31 10.5" stroke-width="1.35"/><path d="M20 10.5 L20 26.5" stroke-width="1.15"/><path d="M11.5 26.5 L20 10.5 L28.5 26.5" stroke-width="1.6"/><circle cx="20" cy="32" r="1.6" fill="#E6A064" stroke="none"/></svg>
         </span>
         <span>Yash Thakur<span class="brand-sub">Make it, then make sure it lands.</span></span>
       </a>
-      <p class="note">Rendered over #090A09 primary dark with soft ivory typography.</p>
+      <p class="note">Rendered over #0B0A09 primary dark with warm ivory typography.</p>
     </article>
 
     <article class="card">
