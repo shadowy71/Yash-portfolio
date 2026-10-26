@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  color: var(--emerald-deep, #123F34);
+  color: var(--accent-bright, #E6A064);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -15,8 +15,8 @@
   width: 0.38rem;
   height: 0.38rem;
   border-radius: 50%;
-  background: var(--emerald-accent, #1D6955);
-  box-shadow: 0 0 0 5px rgba(29, 105, 85, 0.14);
+  background: var(--accent-bright, #E6A064);
+  box-shadow: 0 0 0 5px rgba(230, 160, 100, 0.16);
 }
 .intro-name,
 .intro-word {
@@ -29,7 +29,7 @@
   font-family: var(--font-display);
   font-size: 1.12rem;
   letter-spacing: 0.14em;
-  color: var(--emerald-deep, #123F34);
+  color: var(--accent-pale, #EFC39B);
 }
 .intro-skip {
   position: absolute;
@@ -39,7 +39,7 @@
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
   border: 1px solid var(--border-light-strong);
-  background: var(--soft-white);
+  background: var(--bg-dark-elevated);
   color: var(--ink);
   font-size: 0.75rem;
   cursor: pointer;
@@ -52,7 +52,7 @@
   object-position: 50% 28%;
   border-radius: 50%;
   border: 1.5px solid rgba(245, 241, 235, 0.75);
-  box-shadow: 0 0 0 1px rgba(218, 125, 151, 0.35);
+  box-shadow: 0 0 0 1px rgba(230, 160, 100, 0.40);
 }
 html[data-hero-reveal="off"].hero-intro-running .intro-point { animation: intro-point 1.3s var(--ease) both; }
 html[data-hero-reveal="off"].hero-intro-running .intro-name { animation: intro-name 1.1s 1.25s var(--ease) both; }

@@ -1,24 +1,26 @@
 /* =========================================================
    Hero Portrait Reveal — Spatial Cinematic Benchmark
-   Primary dark (#090A09), selective rose illumination,
-   deep emerald grounding, and editorial Fraunces display.
-   Revert to warm-ivory legacy hero via data-hero-reveal="off" on <html>.
+   Primary dark (#0B0A09), burnt-orange / amber environmental
+   illumination graded to the portrait poster frame, deep-brown
+   grounding, and editorial Fraunces display. This scene is the
+   visual source of truth for the whole site's token system.
+   Revert to legacy hero via data-hero-reveal="off" on <html>.
    ========================================================= */
 
 .hero-stage {
   position: relative;
-  background: var(--bg-dark-primary, #090A09);
+  background: var(--bg-dark-primary, #0B0A09);
   isolation: isolate;
 }
 
 .hero-portrait-reveal {
-  --hero-bg: var(--bg-dark-primary, #090A09);
-  --hero-rose: #DA7D97;
-  --hero-rose-glow: rgba(218, 125, 151, 0.22);
-  --hero-rose-core: rgba(229, 164, 183, 0.28);
-  --hero-emerald-ambient: rgba(18, 63, 52, 0.34);
-  --hero-light: var(--ivory, #F5F1EB);
-  --hero-light-soft: rgba(245, 241, 235, 0.76);
+  --hero-bg: var(--bg-dark-primary, #0B0A09);
+  --hero-accent: var(--accent, #C77A42);
+  --hero-accent-glow: rgba(199, 122, 66, 0.22);
+  --hero-accent-core: rgba(230, 160, 100, 0.27);
+  --hero-brown-ambient: rgba(92, 54, 26, 0.34);
+  --hero-light: var(--ivory, #F3EDE4);
+  --hero-light-soft: rgba(243, 237, 228, 0.76);
   --hero-duration: 6200ms;
 
   position: relative;
@@ -32,10 +34,10 @@
   overflow: clip;
   color: var(--hero-light);
   background:
-    radial-gradient(ellipse 68% 46% at 50% 18%, rgba(218, 125, 151, 0.14) 0%, transparent 72%),
-    radial-gradient(ellipse 75% 50% at 18% 88%, rgba(18, 63, 52, 0.24) 0%, transparent 68%),
-    radial-gradient(ellipse 70% 45% at 84% 86%, rgba(218, 125, 151, 0.08) 0%, transparent 66%),
-    linear-gradient(180deg, #0B0C0B 0%, #090A09 54%, #0D100E 100%);
+    radial-gradient(ellipse 68% 46% at 50% 18%, rgba(199, 122, 66, 0.15) 0%, transparent 72%),
+    radial-gradient(ellipse 75% 50% at 18% 88%, rgba(92, 54, 26, 0.26) 0%, transparent 68%),
+    radial-gradient(ellipse 70% 45% at 84% 86%, rgba(230, 160, 100, 0.08) 0%, transparent 66%),
+    linear-gradient(180deg, #0D0B09 0%, #0B0A09 54%, #0E0C0A 100%);
   perspective: 1200px;
 }
 
@@ -43,7 +45,7 @@
   display: none;
 }
 
-/* Soft upper rose atmospheric bloom */
+/* Soft upper amber atmospheric bloom */
 .hero-portrait-reveal::before {
   content: "";
   position: absolute;
@@ -52,8 +54,8 @@
   pointer-events: none;
   background: radial-gradient(
     ellipse 50% 54% at 50% 28%,
-    var(--hero-rose-glow) 0%,
-    rgba(218, 125, 151, 0.07) 44%,
+    var(--hero-accent-glow) 0%,
+    rgba(199, 122, 66, 0.08) 44%,
     transparent 74%
   );
   opacity: 0.95;
@@ -71,9 +73,9 @@
   pointer-events: none;
   background: linear-gradient(
     to top,
-    #090A09 0%,
-    rgba(9, 10, 9, 0.90) 34%,
-    rgba(9, 10, 9, 0.42) 68%,
+    #0B0A09 0%,
+    rgba(11, 10, 9, 0.90) 34%,
+    rgba(11, 10, 9, 0.42) 68%,
     transparent 100%
   );
 }
@@ -88,7 +90,7 @@
   transform: translate3d(0, -1%, 0) rotateX(0deg) scale(1.015);
 }
 
-/* Atmospheric rose halo behind portrait & heading */
+/* Atmospheric amber halo behind portrait & heading */
 .hero-reveal__backlight {
   position: absolute;
   top: 45%;
@@ -100,9 +102,9 @@
   pointer-events: none;
   background: radial-gradient(
     circle,
-    var(--hero-rose-core) 0%,
-    rgba(218, 125, 151, 0.13) 34%,
-    rgba(18, 63, 52, 0.14) 58%,
+    var(--hero-accent-core) 0%,
+    rgba(199, 122, 66, 0.14) 34%,
+    rgba(92, 54, 26, 0.16) 58%,
     transparent 74%
   );
   opacity: 0.92;
@@ -120,9 +122,9 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(218, 125, 151, 0.22) 25%,
+    rgba(230, 160, 100, 0.26) 25%,
     rgba(245, 241, 235, 0.16) 50%,
-    rgba(29, 105, 85, 0.24) 75%,
+    rgba(199, 122, 66, 0.20) 75%,
     transparent 100%
   );
   opacity: 0.78;
@@ -138,8 +140,9 @@
   object-fit: cover;
   object-position: 50% 18%;
   transform: translate3d(calc(-50% + var(--portrait-x, 0px)), var(--portrait-y, 0px), 0);
-  background: #0D0E0D url("assets/yash-thakur-lqip.webp") center / cover no-repeat;
-  filter: contrast(1.05) saturate(0.96) brightness(0.95);
+  background: #0E0C0A url("assets/yash-thakur-lqip.webp") center / cover no-repeat;
+  /* Whisper of sepia seats the portrait in the room's warm light */
+  filter: contrast(1.05) saturate(0.97) brightness(0.95) sepia(0.10);
   -webkit-mask-image:
     radial-gradient(ellipse 62% 74% at 50% 44%, #000 38%, rgba(0, 0, 0, 0.74) 64%, rgba(0, 0, 0, 0.16) 85%, transparent 98%);
   mask-image:
@@ -184,7 +187,7 @@
   padding: 0.35rem 0.9rem;
   border-radius: 999px;
   border: 1px solid rgba(245, 241, 235, 0.11);
-  background: rgba(17, 19, 16, 0.52);
+  background: rgba(19, 15, 12, 0.55);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -193,8 +196,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #E5A4B7;
-  box-shadow: 0 0 10px rgba(218, 125, 151, 0.7);
+  background: #E6A064;
+  box-shadow: 0 0 10px rgba(230, 160, 100, 0.65);
 }
 
 .hero-reveal__name {
@@ -207,9 +210,9 @@
   line-height: 0.98;
   font-variation-settings: "SOFT" 20, "WONK" 1;
   text-shadow:
-    0 2px 24px rgba(9, 10, 9, 0.65),
-    0 0 28px rgba(218, 125, 151, 0.28),
-    0 0 68px rgba(218, 125, 151, 0.14);
+    0 2px 24px rgba(11, 10, 9, 0.65),
+    0 0 28px rgba(230, 160, 100, 0.26),
+    0 0 68px rgba(199, 122, 66, 0.16);
 }
 
 .hero-reveal__word {
@@ -272,14 +275,14 @@
   gap: 0.55rem;
   padding: 0.88rem 1.45rem;
   border-radius: 999px;
-  background: var(--ivory, #F5F1EB);
-  color: var(--bg-dark-primary, #090A09);
+  background: var(--ivory, #F3EDE4);
+  color: var(--bg-dark-primary, #0B0A09);
   border: 1px solid rgba(245, 241, 235, 0.9);
   font-size: 0.88rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   text-decoration: none;
-  box-shadow: 0 10px 28px -10px rgba(218, 125, 151, 0.32);
+  box-shadow: 0 10px 28px -10px rgba(199, 122, 66, 0.38);
   transition:
     background-color 0.28s var(--ease, ease),
     color 0.28s var(--ease, ease),
@@ -289,11 +292,11 @@
 }
 
 .hero-reveal__btn:hover {
-  background: var(--emerald-deep, #123F34);
-  color: var(--soft-white, #FFFCF8);
-  border-color: rgba(29, 105, 85, 0.75);
+  background: var(--accent-bright, #E6A064);
+  color: var(--ink-on-accent, #1B1108);
+  border-color: var(--accent-bright, #E6A064);
   transform: translateY(-2px);
-  box-shadow: 0 14px 32px -10px rgba(18, 63, 52, 0.6);
+  box-shadow: 0 14px 32px -10px rgba(230, 160, 100, 0.50);
 }
 
 .hero-reveal__btn:active {
@@ -327,8 +330,8 @@
 }
 
 .hero-reveal__secondary:hover {
-  color: #F5F1EB;
-  border-color: #E5A4B7;
+  color: #F3EDE4;
+  border-color: #E6A064;
 }
 
 .hero-reveal__secondary:hover::after {
@@ -345,7 +348,7 @@
   border-radius: 999px;
   border: 1px solid rgba(245, 241, 235, 0.24);
   color: rgba(245, 241, 235, 0.86);
-  background: rgba(17, 19, 16, 0.68);
+  background: rgba(19, 15, 12, 0.70);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   font: 600 0.74rem/1.2 var(--font-body, sans-serif);
@@ -357,8 +360,8 @@
 
 .hero-reveal__skip:hover {
   border-color: rgba(245, 241, 235, 0.55);
-  background: rgba(18, 63, 52, 0.72);
-  color: #FFFCF8;
+  background: rgba(43, 29, 17, 0.80);
+  color: #FFFBF4;
 }
 
 .hero-reveal__skip[hidden] {
@@ -368,9 +371,9 @@
 .hero-reveal__skip:focus-visible,
 .hero-reveal__btn:focus-visible,
 .hero-reveal__secondary:focus-visible {
-  outline: 2px solid #E5A4B7;
+  outline: 2px solid #E6A064;
   outline-offset: 3px;
-  box-shadow: 0 0 0 3px #090A09;
+  box-shadow: 0 0 0 3px #0B0A09;
 }
 
 /* One-shot subtle camera & lighting entrance */
@@ -471,7 +474,7 @@ html[data-hero-reveal="off"] .hero-portrait-reveal {
 }
 
 html[data-hero-reveal="off"] .hero-stage {
-  background: var(--ivory, #F5F1EB);
+  background: var(--bg-dark-primary, #0B0A09);
 }
 
 /* Responsive adjustments */
